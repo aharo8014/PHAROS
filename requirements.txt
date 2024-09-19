@@ -1,0 +1,7 @@
+streamlit==1.22.0  # Versión recomendada de Streamlit
+pandas==1.5.3      # Para el manejo de DataFrames
+plotly==5.11.0     # Para la visualización interactiva
+scikit-learn==1.2.2 # Para modelos de regresión y árboles de decisión
+statsmodels==0.13.5 # Para análisis estadístico y regresión
+numpy==1.24.2      # Librería para operaciones numéricas
+matplotlib==3.7.1  # Para visualización de gráficos (se usa en parte del código)
