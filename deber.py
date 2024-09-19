@@ -14,11 +14,11 @@ import matplotlib.pyplot as plt
 # Configuración de la página (más ancha)
 st.set_page_config(layout="wide")
 
-
-# Cargar los datos
-@st.cache_data
 def load_data():
+    # Enlace de descarga directa desde Google Drive
     file_url = 'https://docs.google.com/spreadsheets/d/1mgDS76mbR9moLdNRShISSTpZIniAFcyJ/export?format=xlsx'
+
+    # Leer el archivo Excel desde la URL
     df = pd.read_excel(file_url, sheet_name='Sheet1')
     return df
 
