@@ -22,7 +22,6 @@ def load_data():
     df = pd.read_excel(file_url, sheet_name='Sheet1')
     return df
 
-
 df = load_data()
 
 # Crear pestañas para la aplicación
@@ -112,6 +111,16 @@ with tab1:
         fig = plot_line_chart_individual(df_filtered, indicador, indicador)
         st.plotly_chart(fig, use_container_width=True)
 
+        # Añadir el texto correspondiente
+        if indicador == "( PATRIMONIO + RESULTADOS ) / ACTIVOS INMOVILIZADOS":
+            st.write("Un valor más bajo sugiere que la entidad está siendo más eficiente en la utilización de sus recursos, destinándolos principalmente a activos productivos o generadores de ingresos, optimizando así su estructura financiera.")
+        elif indicador == "ACTIVOS IMPRODUCTIVOS NETOS / TOTAL ACTIVOS":
+            st.write("Mientras menor sea el indicador, significa que la entidad está siendo más eficiente destinando en la colocación de sus recursos en activos productivos.")
+        elif indicador == "ACTIVOS PRODUCTIVOS / TOTAL ACTIVOS":
+            st.write("Mientras más alta es la relación significa que la entidad está siendo eficiente en la colocación de créditos en el mercado.")
+        elif indicador == "ACTIVOS PRODUCTIVOS / PASIVOS CON COSTO":
+            st.write("Mientras más alta la relación, generará una mejor eficiencia en la colocación de recursos captados.")
+
     # Gráficos de Índices de Morosidad (Dispersión en lugar de líneas)
     st.subheader("Índices de Morosidad")
     indicadores_morosidad = [
@@ -127,6 +136,22 @@ with tab1:
     for indicador in indicadores_morosidad:
         fig = plot_scatter_or_bar(df_filtered, indicador, indicador, graph_type='scatter')
         st.plotly_chart(fig, use_container_width=True)
+
+        # Añadir el texto correspondiente
+        if indicador == "MOROSIDAD DE LA CARTERA DE CREDITO PRODUCTIVO":
+            st.write("Mientras mayor sea el indicador, significa que las entidades están teniendo problemas en la recuperación de la cartera de crédito productivo. La relación mientras más baja es mejor.")
+        elif indicador == "MOROSIDAD DE LA CARTERA DE CONSUMO":
+            st.write("Mientras mayor sea el indicador, significa que las entidades están teniendo problemas en la recuperación de la cartera de crédito de consumo. La relación mientras más baja es mejor.")
+        elif indicador == "MOROSIDAD DE LA CARTERA DE CREDITO INMOBILIARIO":
+            st.write("Mientras mayor sea el indicador, significa que las entidades están teniendo problemas en la recuperación de la cartera de crédito inmobiliario. La relación mientras más baja es mejor.")
+        elif indicador == "MOROSIDAD DE LA CARTERA DE MICROCREDITO":
+            st.write("Mientras mayor sea el indicador, significa que las entidades están teniendo problemas en la recuperación de la cartera de crédito microcrédito. La relación mientras más baja es mejor.")
+        elif indicador == "MOROSIDAD DE LA CARTERA DE VIVIENDA DE INTERES SOCIAL Y PUBLICO":
+            st.write("Mientras mayor sea el indicador, significa que las entidades están teniendo problemas en la recuperación de la cartera de vivienda de interés público. La relación mientras más baja es mejor.")
+        elif indicador == "MOROSIDAD DE LA CARTERA DE CREDITO EDUCATIVO":
+            st.write("Mientras mayor sea el indicador, significa que las entidades están teniendo problemas en la recuperación de la cartera de crédito educativo. La relación mientras más baja es mejor.")
+        elif indicador == "MOROSIDAD DE LA CARTERA TOTAL":
+            st.write("Mientras mayor sea el indicador, significa que las entidades están teniendo problemas en la recuperación de la cartera. La relación mientras más baja es mejor.")
 
     # Gráficos de Cobertura de Provisiones para Cartera Improductiva (Barras)
     st.subheader("Cobertura de Provisiones para Cartera Improductiva")
@@ -144,11 +169,29 @@ with tab1:
         fig = plot_scatter_or_bar(df_filtered, indicador, indicador, graph_type='bar')
         st.plotly_chart(fig, use_container_width=True)
 
+        # Añadir el texto correspondiente
+        if indicador == "COBERTURA DE LA CARTERA DE CREDITO PRODUCTIVO":
+            st.write("Determina la proporción de la cartera de crédito comercial ordinario que registra problemas de incobrabilidad que se encuentra cubierta por provisiones.")
+        elif indicador == "COBERTURA DE LA CARTERA DE CREDITO CONSUMO":
+            st.write("Mide la cobertura (nivel de protección) de la cartera de crédito de consumo que registra problemas de incobrabilidad en la entidad.")
+        elif indicador == "COBERTURA DE LA CARTERA DE CREDITO INMOBILIARIO":
+            st.write("Mide la cobertura (nivel de protección) de la cartera de crédito inmobiliario que registra problemas de incobrabilidad en la entidad.")
+        elif indicador == "COBERTURA DE LA CARTERA DE MICROCREDITO":
+            st.write("Mide la cobertura (nivel de protección) de la cartera de microcrédito que registra problemas de incobrabilidad en la entidad.")
+        elif indicador == "COBERTURA DE LA CARTERA DE VIVIENDA DE IINTERES PUBLICO":
+            st.write("Mide la cobertura (nivel de protección) de la cartera de crédito vivienda de interés público que registra problemas de incobrabilidad en la entidad.")
+        elif indicador == "COBERTURA DE LA CARTERA DE CREDITO EDUCATIVO":
+            st.write("Mide la cobertura (nivel de protección) de la cartera de crédito educativo que registra problemas de incobrabilidad en la entidad.")
+        elif indicador == "COBERTURA DE LA CARTERA PROBLEMÁTICA":
+            st.write("Establece la suficiencia de contingencia de la cartera que cae en mora a través de la construcción de una provisión en función del tamaño de la cartera improductiva.")
+
     # --- Gráfico de Intermediación financiera ---
     st.subheader("Intermediación Financiera")
     indicador_intermediacion = "CARTERA BRUTA / (DEPOSITOS A LA VISTA + DEPOSITOS A PLAZO)"
     fig_intermediacion = plot_line_chart_individual(df_filtered, indicador_intermediacion, "Intermediación Financiera")
     st.plotly_chart(fig_intermediacion, use_container_width=True)
+
+    st.write("Mientras mayor es el indicador, significa que la entidad es más eficiente en la colocación de préstamos en función a la cantidad de depósitos a la vista y a plazo que recepta.")
 
     # --- Gráficos de Rendimiento de la cartera ---
     st.subheader("Rendimiento de la Cartera")
@@ -168,7 +211,26 @@ with tab1:
         fig = plot_line_chart_individual(df_filtered, indicador, indicador)
         st.plotly_chart(fig, use_container_width=True)
 
-    # --- Gráficos
+        # Añadir el texto correspondiente
+        if indicador == "RENDIMIENTO DE LA CARTERA DE CREDITO PRODUCTIVO POR VENCER":
+            st.write("Mientras mayor sea el indicador, evidencia una mayor ganancia respecto a los intereses cobrados sobre la cartera de crédito productivo otorgada eficientemente.")
+        elif indicador == "RENDIMIENTO DE LA CARTERA DE CREDITO CONSUMO":
+            st.write("Mientras mayor sea el indicador, evidencia una mayor ganancia respecto a los intereses cobrados sobre la cartera de crédito de consumo prioritario otorgada eficientemente.")
+        elif indicador == "RENDIMIENTO DE LA CARTERA DE CREDITO INMOBILIARIO POR VENCER":
+            st.write("Mientras mayor sea el indicador, evidencia una mayor ganancia respecto a los intereses cobrados sobre la cartera de crédito inmobiliario otorgada eficientemente.")
+        elif indicador == "RENDIMIENTO DE LA CARTERA DE MICROCREDITO POR VENCER":
+            st.write("Mientras mayor sea el indicador, evidencia una mayor ganancia respecto a los intereses cobrados sobre la cartera de crédito microcrédito otorgada eficientemente.")
+        elif indicador == "RENDIMIENTO DE LA CARTERA DE VIVIENDA DE IINTERES PUBLICO POR VENCER":
+            st.write("Mientras mayor sea el indicador, evidencia una mayor ganancia respecto a los intereses cobrados sobre la cartera de crédito vivienda de interés público otorgada eficientemente.")
+        elif indicador == "RENDIMIENTO DE LA CARTERA DE CREDITO EDUCATIVO POR VENCER":
+            st.write("Mientras mayor sea el indicador, evidencia una mayor ganancia respecto a los intereses cobrados sobre la cartera de crédito educativo otorgada eficientemente.")
+        elif indicador == "CARTERAS DE CRÉDITOS  REFINANCIADAS":
+            st.write("Mientras mayor sea el indicador, evidencia una mayor ganancia respecto a los intereses cobrados sobre la cartera de crédito refinanciado eficientemente.")
+        elif indicador == "CARTERAS DE CRÉDITOS  REESTRUCTURADAS":
+            st.write("Mientras mayor sea el indicador, evidencia una mayor ganancia respecto a los intereses cobrados sobre la cartera de crédito reestructurado eficientemente.")
+        elif indicador == "CARTERA POR VENCER TOTAL":
+            st.write("Mientras mayor sea el indicador, evidencia una mayor ganancia respecto a los intereses cobrados sobre la cartera de crédito otorgada eficientemente.")
+
     # --- Gráficos de Vulnerabilidad del patrimonio ---
     st.subheader("Vulnerabilidad del Patrimonio")
     indicadores_vulnerabilidad = [
@@ -182,11 +244,23 @@ with tab1:
         fig = plot_line_chart_individual(df_filtered, indicador, indicador)
         st.plotly_chart(fig, use_container_width=True)
 
+        # Añadir el texto correspondiente
+        if indicador == "CARTERA IMPRODUCTIVA DESCUBIERTA / (PATRIMONIO + RESULTADOS)":
+            st.write("Mientras más alto sea el indicador, significaría que los resultados del ejercicio de intermediación pueden tener mayor vulnerabilidad de no registrar ingresos esperados, ya que existiría una mayor proporción de cartera con potencialidad de incobrabilidad.")
+        elif indicador == "CARTERA IMPRODUCTIVA / PATRIMONIO (DIC)":
+            st.write("Mientras más alto sea el indicador, significaría que los resultados del ejercicio de intermediación pueden tener mayor vulnerabilidad de no registrar ingresos esperados, y posteriormente no representar un aliciente para el patrimonio, ya que existiría una mayor proporción de cartera con potencialidad de incobrabilidad.")
+        elif indicador == "FK = (PATRIMONIO + RESULTADOS - INGRESOS EXTRAORDINARIOS) / ACTIVOS TOTALES":
+            st.write("Mientras más alto es el indicador, refleja que el patrimonio, asociado con las ganancias propias del giro del negocio de la entidad financiera es eficiente ya que no depende en gran medida de los ingresos no propios del mismo.")
+        elif indicador == "INDICE DE CAPITALIZACION NETO: FK / FI":
+            st.write("Mientras más alto el indicador, representa que la entidad está teniendo una mayor ganancia a pesar de la variabilidad que podrían presentar los activos en riesgo.")
+
     # --- Gráfico de Activos improductivos ---
     st.subheader("Activos Improductivos")
     indicador_activos_improductivos = "FI = 1 + (ACTIVOS IMPRODUCTIVOS / ACTIVOS TOTALES)"
     fig_activos_improductivos = plot_line_chart_individual(df_filtered, indicador_activos_improductivos, "Activos Improductivos")
     st.plotly_chart(fig_activos_improductivos, use_container_width=True)
+
+    st.write("Mientras menor sea el indicador, significa que la entidad está siendo más eficiente destinando en la colocación de sus recursos en activos productivos.")
 
 # -------------------------------------------
 # PESTAÑA 2: EVALUACIÓN DE SIGNIFICANCIA ESTADÍSTICA
